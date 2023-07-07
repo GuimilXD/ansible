@@ -1,0 +1,39 @@
+- name: Install Core Packages For Neovim (lua)
+  become: yes
+  pacman:
+    name: ["lua"]
+  tags:
+    - nvim
+    - core
+    - install
+- name: Install C Enviroment
+  become: yes
+  pacman:
+    name: ["make", "pkg-config", "clang", "bear"]
+  tags:
+    - dotfiles
+    - core
+    - install
+- name: Install Core Packages (system utils)
+  become: yes
+  pacman:
+    name: ["unzip", "fzf", "ripgrep", "htop", "curl", "man", "which"]
+  tags:
+    - core
+    - install
+- name: Install Desktop Enviroment Packages
+  become: yes
+  pacman:
+    name: ["hyprland", "pavucontrol", "firefox", "qbittorrent", "nautilus", "alacritty", "mpv", "pipewire", "wireplumber"]
+  tags:
+    - install
+    - desktop
+- name: Enable Display Manager
+  become: yes
+  ansible.builtin.systemd:
+    name: sddm
+    enabled: true
+  tags:
+    - install
+    - desktop
+    - systemd

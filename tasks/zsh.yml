@@ -1,0 +1,38 @@
+- name: Install ZSH
+  become: yes
+  pacman: name=zsh
+  tags: &tags_for_zsh_tasks [ 'install', 'productivity', 'dotfiles', 'zsh' ]
+
+- name: Change shell to zsh
+  become: yes
+  shell: "chsh -s $(which zsh) {{ lookup('env', 'USER') }}"
+  tags: *tags_for_zsh_tasks
+
+- name: Check that the somefile.conf exists
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/.oh-my-zsh"
+  register: oh_my_stats
+  tags: *tags_for_zsh_tasks
+
+- name: Oh-My-Zsh
+  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
+  tags: *tags_for_zsh_tasks
+  when: oh_my_stats.stat.exists == False
+  become_user: guil
+
+- name: Install Spaceship Theme
+  git:
+    repo: "https://github.com/denysdovhan/spaceship-prompt.git"
+    dest: "{{ lookup('env', 'HOME')}}/.oh-my-zsh/custom/themes/spaceship-prompt"
+  tags: *tags_for_zsh_tasks
+
+- name: Create symlink for Spaceship theme
+  shell: ln -s "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+  tags: *tags_for_zsh_tasks
+
+- name: Remove default .zshrc to avoid conflict with stow
+  file:
+    name: "{{ lookup('env', 'HOME') }}/.zshrc"
+    state: absent
+  tags: *tags_for_zsh_tasks
+

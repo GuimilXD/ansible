@@ -1,0 +1,18 @@
+- name: Install Nvim
+  become: yes
+  pacman: name=neovim
+  tags:
+    - install
+    - nvim
+- name: Get Packer
+  ansible.builtin.git:
+    repo: 'https://github.com/wbthomason/packer.nvim'
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  tags:
+    - install
+    - neovim
+- name: Run my installation script
+  shell: "{{ lookup('env', 'HOME') }}/.config/nvim/install"
+  tags:
+    - install
+    - nvim
