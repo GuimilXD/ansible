@@ -2,6 +2,15 @@
   vars:
     source_key: "./.ssh/id_rsa"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+    privkeys: "./privkeys.gpg"
+    gnupg_pass: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      32396337643736666261646133366534363563646638643464616538666662343637323163386632
+      6664353663396236326338636565643666633339303530310a383037393966633635396638666439
+      65623136303133656664643035636235383935646566393161363162613062653736646462656664
+      3637393135326666380a633739366535333537643362363631306664363739373532643438343030
+      6461
+
   pre_tasks:
     - name: Update Pacman
       become: true
@@ -18,3 +27,5 @@
     - include: tasks/dotfiles.yml
     - include: tasks/nvim.yml
     - include: tasks/tmux.yml
+    - include: tasks/gpg-keys.yml
+    - include: tasks/password-store.yml

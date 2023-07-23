@@ -15,4 +15,4 @@ USER guil
 FROM guil
 ENV USER=guil
 COPY --chown=guil:guil . .
-CMD ansible-playbook $TAGS --skip-tags desktop local.yml && bash
+CMD ansible-playbook $TAGS --skip-tags desktop --vault-pass-file=vaultpass.txt local.yml && bash

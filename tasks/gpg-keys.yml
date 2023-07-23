@@ -1,0 +1,22 @@
+- name: Install gnupg
+  become: yes
+  pacman: name=gnupg
+  tags:
+    - gnupg
+    - install
+- name: Decrypt privkeys file
+  copy:
+    src: "{{ privkeys }}"
+    dest: "{{ privkeys }}"
+    decrypt: yes
+  tags:
+    - gnupg
+- name: Import secret keys
+  shell: "gpg
+    --batch
+    --pinentry-mode loopback
+    --passphrase {{ gnupg_pass }}
+    --import {{ privkeys }}"
+  tags:
+    - gnupg
+
