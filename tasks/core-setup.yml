@@ -33,7 +33,6 @@
     name: waybar-git
     use: makepkg
     state: present
-  become: yes
   tags:
     - install
     - desktop
