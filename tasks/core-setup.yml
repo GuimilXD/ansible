@@ -21,10 +21,19 @@
   tags:
     - core
     - install
-- name: Install Desktop Enviroment Packages
+- name: Install Desktop Enviroment Packages I
   become: yes
   pacman:
     name: ["wofi", "feh", "sddm", "hyprland", "pavucontrol", "firefox", "qbittorrent", "nautilus", "alacritty", "mpv", "pipewire", "wireplumber"]
+  tags:
+    - install
+    - desktop
+- name: Install Desktop Enviroment Packages II (AUR)
+  aur:
+    name: waybar-git
+    use: makepkg
+    state: present
+  become: yes
   tags:
     - install
     - desktop
