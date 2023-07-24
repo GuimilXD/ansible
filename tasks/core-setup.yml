@@ -28,6 +28,14 @@
   tags:
     - install
     - desktop
+- name: Allow the user to run `sudo pacman` without a password
+  become: yes
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/11-install-aur_builder
+    line: "{{ lookup('env', 'USER') }} ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+    create: yes
+    mode: 0644
+    validate: 'visudo -cf %s'
 - name: Install Desktop Enviroment Packages II (AUR)
   kewlfft.aur.aur:
     name: waybar-git
