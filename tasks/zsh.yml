@@ -27,7 +27,10 @@
   tags: *tags_for_zsh_tasks
 
 - name: Create symlink for Spaceship theme
-  shell: ln -s "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+  file:
+    src: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme"
+    dest:  "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+    state: link
   tags: *tags_for_zsh_tasks
 
 - name: Remove default .zshrc to avoid conflict with stow
