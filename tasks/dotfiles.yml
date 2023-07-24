@@ -11,6 +11,7 @@
     repo: "git@github.com:Guimilxd/Dotfiles"
     recursive: yes
     dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
+    force: yes
     accept_hostkey: yes
     version: main
   tags:
