@@ -24,7 +24,7 @@
 - name: Install Desktop Enviroment Packages
   become: yes
   pacman:
-    name: ["hyprland", "pavucontrol", "firefox", "qbittorrent", "nautilus", "alacritty", "mpv", "pipewire", "wireplumber"]
+    name: ["sddm", "hyprland", "pavucontrol", "firefox", "qbittorrent", "nautilus", "alacritty", "mpv", "pipewire", "wireplumber"]
   tags:
     - install
     - desktop
