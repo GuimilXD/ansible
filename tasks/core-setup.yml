@@ -29,7 +29,7 @@
     - install
     - desktop
 - name: Install Desktop Enviroment Packages II (AUR)
-  aur:
+  kewlfft.aur.aur:
     name: waybar-git
     use: makepkg
     state: present
