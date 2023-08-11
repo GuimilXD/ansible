@@ -24,7 +24,7 @@
 - name: Install Desktop Enviroment Packages I
   become: yes
   pacman:
-    name: ["wofi", "feh", "sddm", "hyprland", "pavucontrol", "firefox", "qbittorrent", "nautilus", "alacritty", "mpv", "pipewire", "wireplumber"]
+    name: ["yad", "wl-clipboard", "ttf-nerd-fonts-symbols", "swaylock", "ttf-firacode", "grim", "mako", "swaybg", "wofi", "feh", "sddm", "hyprland", "pavucontrol", "firefox", "qbittorrent", "nautilus", "alacritty", "mpv", "pipewire", "wireplumber", "pipewire-pulse"]
   tags:
     - install
     - desktop
@@ -38,7 +38,7 @@
     validate: 'visudo -cf %s'
 - name: Install Desktop Enviroment Packages II (AUR)
   kewlfft.aur.aur:
-    name: waybar-git
+    name: waybar-git xfce-toolkit wlogout
     use: makepkg
     state: present
   tags:
