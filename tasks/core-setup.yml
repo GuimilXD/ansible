@@ -24,7 +24,7 @@
 - name: Install Desktop Enviroment Packages I
   become: yes
   pacman:
-    name: ["yad", "wl-clipboard", "ttf-nerd-fonts-symbols", "swaylock", "ttf-firacode", "grim", "mako", "swaybg", "wofi", "feh", "sddm", "hyprland", "pavucontrol", "firefox", "qbittorrent", "nautilus", "alacritty", "mpv", "pipewire", "wireplumber", "pipewire-pulse"]
+    name: ["alsa-utils", "yad", "wl-clipboard", "ttf-nerd-fonts-symbols", "swaylock", "ttf-firacode", "grim", "mako", "swaybg", "wofi", "feh", "sddm", "hyprland", "pavucontrol", "firefox", "qbittorrent", "nautilus", "alacritty", "mpv", "pipewire", "wireplumber", "pipewire-pulse"]
   tags:
     - install
     - desktop
